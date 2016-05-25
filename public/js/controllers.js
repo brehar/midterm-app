@@ -33,6 +33,7 @@ app.controller('homeCtrl', function($scope, Beers, Database) {
     $scope.notSampled = function() {
         Database.saveNotSampled($scope.currentUser._id, $scope.beer.id).then(res => {
             $scope.sampledSelected = true;
+            $scope.sampledSaved = true;
         });
     };
     
@@ -45,7 +46,7 @@ app.controller('homeCtrl', function($scope, Beers, Database) {
         };
 
         Database.saveRating(beerObj, $scope.currentUser._id).then(res => {
-            alert('Rating saved!');
+            $scope.sampledSaved = true;
         });
     };
 });
@@ -81,6 +82,24 @@ app.controller('sampledCtrl', function($scope, Database) {
     Database.getSampledBeers($scope.currentUser._id).then(res => {
         $scope.beers = res.data;
     });
+    
+    var editingIndex;
+    
+    $scope.editBeer = function(id, beer) {
+        editingIndex = $scope.beers.indexOf(beer);
+        $scope.beerToEdit = angular.copy(beer);
+    };
+
+    $scope.saveEdit = function() {
+        Database.saveChanges($scope.beerToEdit._id, $scope.beerToEdit).then(res => {
+            $scope.beers[editingIndex] = $scope.beerToEdit;
+            $scope.beerToEdit = null;
+        });
+    };
+
+    $scope.cancelEdit = function() {
+        $scope.beerToEdit = null;
+    };
 });
 
 app.controller('unsampledCtrl', function() {

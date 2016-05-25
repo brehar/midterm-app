@@ -42,4 +42,8 @@ app.service('Database', function($http) {
     this.getSampledBeers = userId => {
         return $http.get(`/api/beers/sampled/${userId}`);
     };
+    
+    this.saveChanges = (beerId, beer) => {
+        return $http.put(`/api/beers/${beerId}`, beer);
+    };
 });

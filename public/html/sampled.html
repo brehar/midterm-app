@@ -1,18 +1,44 @@
 <div class="container">
-    <table>
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Rating</th>
-                <th>Comments</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr ng-repeat="beer in beers">
-                <td>{{ beer.name }}</td>
-                <td>{{ beer.rating[0].text }}</td>
-                <td>{{ beer.comments[0].text }}</td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="row" ng-show="beerToEdit">
+        <form class="col s12" ng-submit="saveEdit()">
+            <div class="row">
+                <div class="input-field col s12">
+                    <input id="rating" type="number" min="1" max="10" class="validate" ng-model="beerToEdit.rating[0].text" required>
+                    <label for="rating" class="active">Rating</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <textarea id="comments" class="materialize-textarea" ng-model="beerToEdit.comments[0].text"></textarea>
+                    <label for="comments" class="active">Comments</label>
+                </div>
+            </div>
+            <div class="row center">
+                <button class="btn waves-effect waves-light" type="button" ng-click="cancelEdit()">Discard Changes</button>
+                <button class="btn waves-effect waves-light" type="submit">Save Changes <i class="material-icons right">send</i></button>
+            </div>
+        </form>
+    </div>
+    <div class="row">
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Rating</th>
+                    <th>Comments</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="beer in beers">
+                    <td>{{ beer.name }}</td>
+                    <td>{{ beer.rating[0].text }}</td>
+                    <td>{{ beer.comments[0].text }}</td>
+                    <td><button type="button" class="btn-floating waves-effect waves-light red" ng-click="editBeer(beer._id, beer)"><i class="material-icons">mode_edit</i></button></td>
+                    <td><button type="button" class="btn-floating waves-effect waves-light red"><i class="material-icons">delete</i></button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>

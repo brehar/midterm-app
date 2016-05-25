@@ -31,4 +31,20 @@ router.put('/save/:user', User.isLoggedIn, (req, res) => {
     });
 });
 
+router.delete('/:beer', User.isLoggedIn, (req, res) => {
+    Beer.findByIdAndRemove(req.params.beer, err => {
+        if (err) {
+            res.status(400).send(err);
+        } else {
+            res.status(200).send();
+        }
+    });
+});
+
+router.put('/:beer', User.isLoggedIn, (req, res) => {
+    Beer.findByIdAndUpdate(req.params.beer, {$set: req.body}, {new: true}, (err, savedBeer) => {
+        res.status(err ? 400 : 200).send(err || savedBeer);
+    });
+});
+
 module.exports = router;

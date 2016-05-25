@@ -17,7 +17,7 @@
                 <button type="button" class="btn waves-effect waves-light" ng-click="sampled()">Sampled</button>
                 <button type="button" class="btn waves-effect waves-light" ng-click="notSampled()">Not Sampled</button>
             </div>
-            <div ng-show="sampledSelected" class="row center">
+            <div ng-show="sampledSelected && !sampledSaved" class="row center">
                 <form class="col s12" ng-submit="submitRating()">
                     <div class="row">
                         <div class="input-field col s12">
@@ -35,6 +35,9 @@
                         <button class="btn waves-effect waves-light" type="submit">Submit <i class="material-icons right">send</i></button>
                     </div>
                 </form>
+            </div>
+            <div ng-show="sampledSaved" class="row center">
+                <p>Information saved!</p>
             </div>
         </div>
     </div>
