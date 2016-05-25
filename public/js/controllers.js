@@ -19,8 +19,10 @@ app.controller('mainCtrl', function($scope, Auth) {
     $('.button-collapse').sideNav();
 });
 
-app.controller('homeCtrl', function() {
-    
+app.controller('homeCtrl', function($scope, Beers) {
+    Beers.getRandom().then(res => {
+        $scope.beer = res.data;
+    });
 });
 
 app.controller('registerCtrl', function($scope, $state, Auth) {
@@ -28,6 +30,7 @@ app.controller('registerCtrl', function($scope, $state, Auth) {
         Auth.registerUser($scope.newUser).then(res => {
             return Auth.loginUser($scope.newUser);
         }).then(res => {
+            $scope.$emit('loggedin');
             $state.go('home');
         });
     };

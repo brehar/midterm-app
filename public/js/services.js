@@ -19,3 +19,7 @@ app.service('Auth', function($http) {
         return $http.delete('/api/users/logout');
     };
 });
+
+app.service('Beers', function($http) {
+    
+});

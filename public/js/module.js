@@ -6,7 +6,15 @@ app.config(function($stateProvider, $urlRouterProvider) {
     $stateProvider.state('home', {
         url: '/',
         templateUrl: '/html/home.html',
-        controller: 'homeCtrl'
+        controller: 'homeCtrl',
+        resolve: {
+            home: function(Auth, $q, $state) {
+                return Auth.getProfile().catch(() => {
+                    $state.go('register');
+                    return $q.reject();
+                });
+            }
+        }
     }).state('register', {
         url: '/register',
         templateUrl: '/html/register.html',

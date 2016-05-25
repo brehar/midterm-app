@@ -53,14 +53,14 @@ userSchema.statics.isLoggedIn = (req, res, next) => {
 };
 
 userSchema.statics.register = function(userObj, cb) {
-    User.findOne({username: userObj.username}, (err, dbUser) => {
+    User.findOne({email: userObj.email}, (err, dbUser) => {
         if (err || dbUser) return cb(err || {error: 'Username not available.'});
 
         bcrypt.hash(userObj.password, 12, (err, hash) => {
             if (err) return cb(err);
 
             var user = new User({
-                username: userObj.username,
+                email: userObj.email,
                 password: hash,
                 firstname: userObj.firstname,
                 lastname: userObj.lastname,
