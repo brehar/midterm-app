@@ -35,6 +35,10 @@ app.controller('homeCtrl', function($scope, Beers, Database) {
             $scope.sampledSelected = true;
         });
     };
+    
+    $scope.submitRating = function() {
+        
+    };
 });
 
 app.controller('registerCtrl', function($scope, $state, Auth) {

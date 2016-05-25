@@ -11,15 +11,6 @@ var beerSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    sampled: [
-        {
-            text: Boolean,
-            postedBy: {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: 'User'
-            }
-        }
-    ],
     rating: [
         {
             text: Number,

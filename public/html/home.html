@@ -13,9 +13,28 @@
             </div>
         </div>
         <div class="col m6 s12">
-            <div class="row center">
-                <button ng-hide="sampledSelected" type="button" class="btn waves-effect waves-light" ng-click="sampled()">Sampled</button>
-                <button ng-hide="sampledSelected" type="button" class="btn waves-effect waves-light" ng-click="notSampled()">Not Sampled</button>
+            <div ng-hide="sampledSelected" class="row center">
+                <button type="button" class="btn waves-effect waves-light" ng-click="sampled()">Sampled</button>
+                <button type="button" class="btn waves-effect waves-light" ng-click="notSampled()">Not Sampled</button>
+            </div>
+            <div ng-show="sampledSelected" class="row center">
+                <form class="col s12" ng-submit="submitRating()">
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="rating" type="number" min="1" max="10" step="1" class="validate" ng-model="newBeer.rating" required>
+                            <label for="rating">Rating</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <textarea id="comments" class="materialize-textarea" ng-model="newBeer.comments"></textarea>
+                            <label for="comments">Comments</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <button class="btn waves-effect waves-light" type="submit">Submit <i class="material-icons right">send</i></button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
