@@ -1,0 +1,38 @@
+<div class="container">
+    <div class="row" ng-show="sampleToEdit">
+        <form class="col s12" ng-submit="saveEdit()">
+            <div class="row">
+                <div class="input-field col s12">
+                    <input id="rating" type="number" min="1" max="10" class="validate" ng-model="newBeer.rating" required>
+                    <label for="rating" class="active">Rating</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <textarea id="comments" class="materialize-textarea" ng-model="newBeer.comments"></textarea>
+                    <label for="comments" class="active">Comments</label>
+                </div>
+            </div>
+            <div class="row center">
+                <button class="btn waves-effect waves-light" type="button" ng-click="cancelEdit()">Discard Changes</button>
+                <button class="btn waves-effect waves-light" type="submit">Save Changes <i class="material-icons right">send</i></button>
+            </div>
+        </form>
+    </div>
+    <div class="row">
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Sampled!</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="beer in beers">
+                    <td>{{ beer }}</td>
+                    <td><button class="btn waves-effect waves-light" type="button" ng-click="sampled(beer)">Sampled!</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -31,7 +31,7 @@ app.controller('homeCtrl', function($scope, Beers, Database) {
     };
 
     $scope.notSampled = function() {
-        Database.saveNotSampled($scope.currentUser._id, $scope.beer.id).then(res => {
+        Database.saveNotSampled($scope.currentUser._id, $scope.beer.name).then(res => {
             $scope.sampledSelected = true;
             $scope.sampledSaved = true;
         });
@@ -82,6 +82,14 @@ app.controller('sampledCtrl', function($scope, Database) {
     Database.getSampledBeers($scope.currentUser._id).then(res => {
         $scope.beers = res.data;
     });
+
+    $scope.removeBeer = function(id, beer) {
+        var index = $scope.beers.indexOf(beer);
+
+        Database.removeBeer(id).then(res => {
+            $scope.beers.splice(index, 1);
+        });
+    };
     
     var editingIndex;
     
@@ -102,8 +110,41 @@ app.controller('sampledCtrl', function($scope, Database) {
     };
 });
 
-app.controller('unsampledCtrl', function() {
+app.controller('unsampledCtrl', function($scope, Database) {
+    Database.getNotSampled($scope.currentUser._id).then(res => {
+        $scope.beers = res.data[0].beersNotSampled;
+    });
     
+    var beerName;
+
+    $scope.sampled = function(name) {
+        $scope.sampleToEdit = true;
+        beerName = name;
+    };
+    
+    $scope.saveEdit = function() {
+        var beerObj = {
+            name: beerName,
+            id: 1,
+            rating: $scope.newBeer.rating,
+            comments: $scope.newBeer.comments
+        };
+
+        Database.saveRating(beerObj, $scope.currentUser._id).then(res => {
+            return Database.toggleSampled($scope.currentUser._id, {beerName: beerName});
+        }).then(res => {
+            var index = $scope.beers.indexOf(beerName);
+            $scope.beers.splice(index, 1);
+
+            $scope.newBeer = {};
+            $scope.sampleToEdit = false;
+        });
+    };
+    
+    $scope.cancelEdit = function() {
+        $scope.newBeer = {};
+        $scope.sampleToEdit = false;
+    };
 });
 
 app.controller('profileCtrl', function() {

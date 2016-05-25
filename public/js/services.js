@@ -31,8 +31,8 @@ app.service('Database', function($http) {
         return $http.post(`/api/users/${userId}/saveSampled/${beerId}`);
     };
 
-    this.saveNotSampled = (userId, beerId) => {
-        return $http.post(`/api/users/${userId}/saveNotSampled/${beerId}`);
+    this.saveNotSampled = (userId, beerName) => {
+        return $http.post(`/api/users/${userId}/saveNotSampled/${beerName}`);
     };
     
     this.saveRating = (beerObj, userId) => {
@@ -45,5 +45,17 @@ app.service('Database', function($http) {
     
     this.saveChanges = (beerId, beer) => {
         return $http.put(`/api/beers/${beerId}`, beer);
+    };
+    
+    this.removeBeer = id => {
+        return $http.delete(`/api/beers/${id}`);
+    };
+    
+    this.getNotSampled = user => {
+        return $http.get(`/api/users/notSampled/${user}`);
+    };
+
+    this.toggleSampled = (user, beerName) => {
+        return $http.put(`/api/users/toggleSampled/${user}`, beerName);
     };
 });

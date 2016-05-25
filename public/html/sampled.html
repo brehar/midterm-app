@@ -36,7 +36,7 @@
                     <td>{{ beer.rating[0].text }}</td>
                     <td>{{ beer.comments[0].text }}</td>
                     <td><button type="button" class="btn-floating waves-effect waves-light red" ng-click="editBeer(beer._id, beer)"><i class="material-icons">mode_edit</i></button></td>
-                    <td><button type="button" class="btn-floating waves-effect waves-light red"><i class="material-icons">delete</i></button></td>
+                    <td><button type="button" class="btn-floating waves-effect waves-light red" ng-click="removeBeer(beer._id, beer)"><i class="material-icons">delete</i></button></td>
                 </tr>
             </tbody>
         </table>
