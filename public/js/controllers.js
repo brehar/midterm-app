@@ -19,10 +19,18 @@ app.controller('mainCtrl', function($scope, Auth) {
     $('.button-collapse').sideNav();
 });
 
-app.controller('homeCtrl', function($scope, Beers) {
+app.controller('homeCtrl', function($scope, Beers, Database) {
     Beers.getRandom().then(res => {
-        $scope.beer = res.data;
+        $scope.beer = res.data.data;
     });
+
+    $scope.sampled = function() {
+        $scope.sampledSelected = true;
+    };
+
+    $scope.notSampled = function() {
+        $scope.sampledSelected = true;
+    };
 });
 
 app.controller('registerCtrl', function($scope, $state, Auth) {

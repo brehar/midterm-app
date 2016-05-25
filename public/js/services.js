@@ -21,5 +21,11 @@ app.service('Auth', function($http) {
 });
 
 app.service('Beers', function($http) {
+    this.getRandom = () => {
+        return $http.get('/api/brewerydb/random');
+    };
+});
+
+app.service('Database', function($http) {
     
 });

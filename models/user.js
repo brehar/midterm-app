@@ -28,7 +28,13 @@ var userSchema = new mongoose.Schema({
     image: {
         type: String
     },
-    beers: [
+    beersSampled: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Beer'
+        }
+    ],
+    beersNotSampled: [
         {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Beer'
