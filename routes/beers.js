@@ -6,6 +6,12 @@ var router = express.Router();
 var Beer = require('../models/beer');
 var User = require('../models/user');
 
+router.get('/sampled/:user', User.isLoggedIn, (req, res) => {
+    Beer.find({}).where('comments.postedBy').equals(req.params.user).exec((err, foundBeers) => {
+        res.status(err ? 400 : 200).send(err || foundBeers);
+    });
+});
+
 router.put('/save/:user', User.isLoggedIn, (req, res) => {
     var beer = new Beer({
         name: req.body.name,

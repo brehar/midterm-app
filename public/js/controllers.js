@@ -45,7 +45,7 @@ app.controller('homeCtrl', function($scope, Beers, Database) {
         };
 
         Database.saveRating(beerObj, $scope.currentUser._id).then(res => {
-            alert('rating saved');
+            alert('Rating saved!');
         });
     };
 });
@@ -77,8 +77,10 @@ app.controller('logoutCtrl', function($scope, $state, Auth) {
     });
 });
 
-app.controller('sampledCtrl', function() {
-
+app.controller('sampledCtrl', function($scope, Database) {
+    Database.getSampledBeers($scope.currentUser._id).then(res => {
+        $scope.beers = res.data;
+    });
 });
 
 app.controller('unsampledCtrl', function() {

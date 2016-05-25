@@ -1,0 +1,18 @@
+<div class="container">
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Rating</th>
+                <th>Comments</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="beer in beers">
+                <td>{{ beer.name }}</td>
+                <td>{{ beer.rating[0].text }}</td>
+                <td>{{ beer.comments[0].text }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

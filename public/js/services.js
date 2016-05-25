@@ -38,4 +38,8 @@ app.service('Database', function($http) {
     this.saveRating = (beerObj, userId) => {
         return $http.put(`/api/beers/save/${userId}`, beerObj);
     };
+    
+    this.getSampledBeers = userId => {
+        return $http.get(`/api/beers/sampled/${userId}`);
+    };
 });
