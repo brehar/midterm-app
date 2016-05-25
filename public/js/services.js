@@ -34,4 +34,8 @@ app.service('Database', function($http) {
     this.saveNotSampled = (userId, beerId) => {
         return $http.post(`/api/users/${userId}/saveNotSampled/${beerId}`);
     };
+    
+    this.saveRating = (beerObj, userId) => {
+        return $http.put(`/api/beers/save/${userId}`, beerObj);
+    };
 });

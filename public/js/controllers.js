@@ -37,7 +37,16 @@ app.controller('homeCtrl', function($scope, Beers, Database) {
     };
     
     $scope.submitRating = function() {
-        
+        var beerObj = {
+            name: $scope.beer.name,
+            id: $scope.beer.id,
+            rating: $scope.newBeer.rating,
+            comments: $scope.newBeer.comments
+        };
+
+        Database.saveRating(beerObj, $scope.currentUser._id).then(res => {
+            alert('rating saved');
+        });
     };
 });
 
@@ -73,7 +82,7 @@ app.controller('sampledCtrl', function() {
 });
 
 app.controller('unsampledCtrl', function() {
-
+    
 });
 
 app.controller('profileCtrl', function() {

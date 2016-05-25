@@ -6,17 +6,17 @@ var router = express.Router();
 var Beer = require('../models/beer');
 var User = require('../models/user');
 
-router.post('/', User.isLoggedIn, (req, res) => {
+router.put('/save/:user', User.isLoggedIn, (req, res) => {
     var beer = new Beer({
         name: req.body.name,
         id: req.body.id,
         rating: [{
             text: req.body.rating,
-            postedBy: req.body.userId
+            postedBy: req.params.user
         }],
         comments: [{
             text: req.body.comments,
-            postedBy: req.body.userId
+            postedBy: req.params.user
         }]
     });
 
