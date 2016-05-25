@@ -5,7 +5,7 @@ var bcrypt = require('bcryptjs');
 var jwt = require('jsonwebtoken');
 var moment = require('moment');
 
-var JWT_SECRET = process.env.JWT_SECRET || 'This is my secret.';
+var JWT_SECRET = process.env.JWT_SECRET;
 
 var userSchema = new mongoose.Schema({
     email: {

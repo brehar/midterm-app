@@ -5,7 +5,7 @@ var request = require('request');
 
 var router = express.Router();
 
-var BEER_KEY = process.env.BEER_KEY || '';
+var BEER_KEY = process.env.BEER_KEY;
 
 router.get('/random', (req, res) => {
     request('http://api.brewerydb.com/v2/beer/random?key=' + BEER_KEY, function(error, response, body) {
