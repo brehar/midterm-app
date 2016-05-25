@@ -30,14 +30,12 @@ var userSchema = new mongoose.Schema({
     },
     beersSampled: [
         {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Beer'
+            type: String
         }
     ],
     beersNotSampled: [
         {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Beer'
+            type: String
         }
     ]
 });

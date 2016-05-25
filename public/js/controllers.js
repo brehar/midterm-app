@@ -25,11 +25,15 @@ app.controller('homeCtrl', function($scope, Beers, Database) {
     });
 
     $scope.sampled = function() {
-        $scope.sampledSelected = true;
+        Database.saveSampled($scope.currentUser._id, $scope.beer.id).then(res => {
+            $scope.sampledSelected = true;
+        });
     };
 
     $scope.notSampled = function() {
-        $scope.sampledSelected = true;
+        Database.saveNotSampled($scope.currentUser._id, $scope.beer.id).then(res => {
+            $scope.sampledSelected = true;
+        });
     };
 });
 

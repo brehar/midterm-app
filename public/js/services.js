@@ -27,5 +27,11 @@ app.service('Beers', function($http) {
 });
 
 app.service('Database', function($http) {
-    
+    this.saveSampled = (userId, beerId) => {
+        return $http.post(`/api/users/${userId}/saveSampled/${beerId}`);
+    };
+
+    this.saveNotSampled = (userId, beerId) => {
+        return $http.post(`/api/users/${userId}/saveNotSampled/${beerId}`);
+    };
 });

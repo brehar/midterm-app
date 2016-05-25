@@ -15,6 +15,26 @@ router.post('/register', (req, res) => {
     });
 });
 
+router.post('/:user/saveSampled/:id', User.isLoggedIn, (req, res) => {
+    User.findById(req.params.user, (err, user) => {
+        user.beersSampled.push(req.params.id);
+        
+        user.save((err, savedUser) => {
+            res.status(err ? 400 : 200).send(err || savedUser);
+        });
+    });
+});
+
+router.post('/:user/saveNotSampled/:id', User.isLoggedIn, (req, res) => {
+    User.findById(req.params.user, (err, user) => {
+        user.beersNotSampled.push(req.params.id);
+
+        user.save((err, savedUser) => {
+            res.status(err ? 400 : 200).send(err || savedUser);
+        });
+    });
+});
+
 router.post('/authenticate', (req, res) => {
     User.authenticate(req.body, (err, token) => {
         if (err) {
